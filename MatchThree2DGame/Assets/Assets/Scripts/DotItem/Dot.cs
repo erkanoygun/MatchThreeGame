@@ -8,8 +8,8 @@ public class Dot : MonoBehaviour
     private Vector2 endMousePos;
 
     public Vector2 targetPos;
-    
-    private float _dotMoveSpeed = 15f;
+
+    private float _dotMoveSpeed = 20f;
     public float mouseDownDotPosX;
     public float mouseDownDotPosY;
     public bool dotIsMoving = false;
@@ -18,6 +18,7 @@ public class Dot : MonoBehaviour
     private DotDragController _dotDragCtrlScr;
     private GameObject _boardGO;
     private Board _boardScript;
+    private FindMatches _findMatchScr;
 
 
     void Start()
@@ -26,13 +27,14 @@ public class Dot : MonoBehaviour
         _boardGO = GameObject.FindWithTag("Board");
         _boardScript = _boardGO.GetComponent<Board>();
         _dotDragCtrlScr = GetComponent<DotDragController>();
+        _findMatchScr = GetComponent<FindMatches>();
     }
 
     private void Update()
     {
         /*We make sure not to make a match check while the stone is moving.*/
         if (_boardScript.isDragible)
-            FindMatches();
+            _findMatchScr.FindMatchesDot();
 
         DotMove();
 
@@ -66,11 +68,14 @@ public class Dot : MonoBehaviour
             {
                 _boardScript.isDragible = true;
                 dotIsMoving = false;
+                //StartCoroutine(TestEnum());
                 StartCoroutine(DotBackOldPositionCheck());
             }
 
         }
     }
+
+    
 
     /*When the same tiles are next to each other, we wait for 0.1 seconds to make sure that the 
     "FindMatches()" method is running and the "isMatch" values are "true" for all tiles with the 
@@ -99,6 +104,12 @@ public class Dot : MonoBehaviour
 
     }
 
+    IEnumerator TestEnum()
+    {
+        yield return new WaitForSeconds(1.5f);
+        _boardScript.isDragible = true;
+    }
+
     private void OnMouseDown()
     {
         if (_boardScript.isDragible)
@@ -117,56 +128,6 @@ public class Dot : MonoBehaviour
         {
             endMousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             _dotDragCtrlScr.CalculateDragDirection(endMousePos, startMousePos);
-        }
-
-    }
-
-    private void FindMatches()
-    {
-
-        GameObject otherDotRight;
-        GameObject otherDotLeft;
-        GameObject otherDotTop;
-        GameObject otherDotDown;
-
-        if (gameObject.transform.position.x < (_boardScript.width - 1f) && gameObject.transform.position.x > 0)
-        {
-            if (!dotIsMoving)
-            {
-                otherDotRight = Board.allDots[(int)gameObject.transform.position.x + 1, (int)gameObject.transform.position.y];
-                otherDotLeft = Board.allDots[(int)gameObject.transform.position.x - 1, (int)gameObject.transform.position.y];
-
-                if (otherDotRight != null && otherDotLeft != null)
-                {
-                    if (otherDotRight.tag == gameObject.tag && otherDotLeft.tag == gameObject.tag)
-                    {
-                        isMatched = true;
-                        otherDotRight.GetComponent<Dot>().isMatched = true;
-                        otherDotLeft.GetComponent<Dot>().isMatched = true;
-                    }
-                }
-
-            }
-        }
-
-        if (gameObject.transform.position.y < (_boardScript.height - 1) && gameObject.transform.position.y > 0)
-        {
-            if (!dotIsMoving)
-            {
-                otherDotTop = Board.allDots[(int)gameObject.transform.position.x, (int)gameObject.transform.position.y + 1];
-                otherDotDown = Board.allDots[(int)gameObject.transform.position.x, (int)gameObject.transform.position.y - 1];
-
-                if (otherDotTop != null && otherDotDown != null)
-                {
-                    if (otherDotTop.tag == gameObject.tag && otherDotDown.tag == gameObject.tag)
-                    {
-                        isMatched = true;
-                        otherDotTop.GetComponent<Dot>().isMatched = true;
-                        otherDotDown.GetComponent<Dot>().isMatched = true;
-                    }
-                }
-
-            }
         }
 
     }

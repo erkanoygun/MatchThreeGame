@@ -10,6 +10,13 @@ TagManager:
   - PingDot
   - RedDot
   - YellowDot
+  - RedCandy
+  - BlueCandy
+  - BrownCandy
+  - GreenCandy
+  - PinkCandy
+  - PurpleCandy
+  - YellowCandy
   layers:
   - Default
   - TransparentFX

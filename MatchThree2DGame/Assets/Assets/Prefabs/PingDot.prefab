@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1490979218689962830}
   - component: {fileID: 6240498588879230906}
   - component: {fileID: -3361069156370871147}
+  - component: {fileID: 9003427908620983464}
   m_Layer: 0
   m_Name: PingDot
   m_TagString: PingDot
@@ -100,7 +101,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetPos: {x: 0, y: 0}
-  _dotIsMoving: 0
+  mouseDownDotPosX: 0
+  mouseDownDotPosY: 0
+  dotIsMoving: 0
   isMatched: 0
 --- !u!58 &6240498588879230906
 CircleCollider2D:
@@ -130,4 +133,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66af9c948f4fa504b95905904f6e44d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetPos: {x: 0, y: 0}
+  dragDirection: 0
+  otherGO: {fileID: 0}
+--- !u!114 &9003427908620983464
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2095193692313745980}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5882eaa0d1835a04aacbd700ad9b517d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

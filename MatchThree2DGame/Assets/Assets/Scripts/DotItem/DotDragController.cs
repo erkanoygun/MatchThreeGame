@@ -26,7 +26,7 @@ public class DotDragController : MonoBehaviour
         // We turn it into a degree.
         float angleDegrees = angleRadians * Mathf.Rad2Deg;
 
-        if (Mathf.Abs(angleDegrees) > 0.15f)
+        if (Mathf.Abs(angleDegrees) > 0.1f)
         {
             if (angleDegrees > -45f && angleDegrees < 45f && _dotScr.mouseDownDotPosX < (_boardScript.width - 1))
             {
@@ -48,6 +48,8 @@ public class DotDragController : MonoBehaviour
                 this.dragDirection = DragDirection.DownDrag;
                 DragDot(this.dragDirection);
             }
+
+            //_boardScript.isDragible = false;
         }
 
 

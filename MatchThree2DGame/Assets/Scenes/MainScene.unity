@@ -155,17 +155,15 @@ MonoBehaviour:
   width: 6
   height: 8
   _dotPrefabs:
-  - {fileID: 6088361959702046165, guid: 1c017a22ec5080c4dbcaba0451da1671, type: 3}
-  - {fileID: 4078835479959266711, guid: d7e3d4e2392ef2640a59bad60d4bddb5, type: 3}
-  - {fileID: 2095193692313745980, guid: 7b0b7c8806da1df4cb03cfdbed511f76, type: 3}
-  - {fileID: 1061987577785377787, guid: 5064ea3977a0c3841b8e89a0fee2525b, type: 3}
-  - {fileID: 6896306432901805938, guid: a29e07d0e789da64584fac32f4b92a32, type: 3}
-  testPrefabDot: {fileID: 2095193692313745980, guid: 7b0b7c8806da1df4cb03cfdbed511f76, type: 3}
-  testPrefabDot2: {fileID: 1061987577785377787, guid: 5064ea3977a0c3841b8e89a0fee2525b, type: 3}
+  - {fileID: 2201230158027605630, guid: fc727ceba61a4574ba510508ca611d4c, type: 3}
+  - {fileID: 1004100120846909525, guid: afaa9a763cb0a8f469fcc40a4153b157, type: 3}
+  - {fileID: 4417219505499461340, guid: c5149a0a44b8f2845b91695fa0b3b226, type: 3}
+  - {fileID: 7719426739983916667, guid: 4fdb9f2cf6a74c043b5bf4236989dee9, type: 3}
+  - {fileID: 1577785907633077066, guid: 8b77079e20861994c958fbd0274a2346, type: 3}
+  - {fileID: 7087436484795516638, guid: 533ba60fff9e63447825ff4f7f35252f, type: 3}
+  - {fileID: 217895085945304268, guid: 1badc9253aae6844fb36b5648d5b8095, type: 3}
+  _backGroundTilePrefab: {fileID: 3395070287624150036, guid: 84b9dd3f0d48ef04f9d173f5010e7392, type: 3}
   isDragible: 1
-  testbool: 1
-  testbool2: 0
-  testbool3: 1
 --- !u!4 &248022537
 Transform:
   m_ObjectHideFlags: 0

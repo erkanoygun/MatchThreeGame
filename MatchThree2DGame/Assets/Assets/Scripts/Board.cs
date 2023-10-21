@@ -6,7 +6,7 @@ public class Board : MonoBehaviour
     public int width = 6;
     public int height = 8;
     [SerializeField] GameObject[] _dotPrefabs;
-    [SerializeField] GameObject testPrefabDot, testPrefabDot2;
+    [SerializeField] private GameObject _backGroundTilePrefab;
     static public GameObject[,] allDots;
 
     public bool isDragible = true;
@@ -21,7 +21,6 @@ public class Board : MonoBehaviour
 
     private void Update()
     {
-
         DotMoveDownSlot();
 
         if (_myCorutine == null)
@@ -91,6 +90,18 @@ public class Board : MonoBehaviour
 
     private void Setup()
     {
+        for (int i = 0; i < width; i++)
+        {
+            for (int j = 0; j < height; j++)
+            {
+                Vector2 backgroundTilePos = new Vector2(i, j);
+                GameObject backGroundPrfb = Instantiate(_backGroundTilePrefab, backgroundTilePos, Quaternion.identity);
+                backGroundPrfb.transform.parent = transform;
+                backGroundPrfb.name = $"bg_({i},{j})";
+            }
+        }
+
+
         GameObject dot;
         for (int i = 0; i < width; i++)
         {
@@ -98,28 +109,12 @@ public class Board : MonoBehaviour
             {
 
                 int dotToUse = Random.Range(0, _dotPrefabs.Length);
-                //int dotToUse;
                 do
                 {
                     dotToUse = Random.Range(0, _dotPrefabs.Length);
                 } while ((i > 0 && _dotPrefabs[dotToUse].tag == allDots[i - 1, j].tag) || (j > 0 && _dotPrefabs[dotToUse].tag == allDots[i, j - 1].tag));
 
                 Vector2 dotPosition = new Vector2(i, j);
-
-                /*
-                if (i == 0 && j == 7)
-                    dot = Instantiate(testPrefabDot, dotPosition, Quaternion.identity);
-                else if (i == 1 && j == 7)
-                    dot = Instantiate(testPrefabDot, dotPosition, Quaternion.identity);
-                else if (i == 2 && j == 6)
-                    dot = Instantiate(testPrefabDot, dotPosition, Quaternion.identity);
-                else if (i == 3 && j == 7)
-                    dot = Instantiate(testPrefabDot, dotPosition, Quaternion.identity);
-
-                else if (i == 2 && j == 7)
-                    dot = Instantiate(testPrefabDot2, dotPosition, Quaternion.identity);
-                else
-                    dot = Instantiate(_dotPrefabs[dotToUse], dotPosition, Quaternion.identity);*/
 
                 dot = Instantiate(_dotPrefabs[dotToUse], dotPosition, Quaternion.identity);
                 dot.transform.parent = transform;
