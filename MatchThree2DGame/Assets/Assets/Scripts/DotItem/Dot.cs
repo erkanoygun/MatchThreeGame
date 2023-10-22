@@ -68,7 +68,6 @@ public class Dot : MonoBehaviour
             {
                 _boardScript.isDragible = true;
                 dotIsMoving = false;
-                //StartCoroutine(TestEnum());
                 StartCoroutine(DotBackOldPositionCheck());
             }
 
@@ -104,11 +103,6 @@ public class Dot : MonoBehaviour
 
     }
 
-    IEnumerator TestEnum()
-    {
-        yield return new WaitForSeconds(1.5f);
-        _boardScript.isDragible = true;
-    }
 
     private void OnMouseDown()
     {

@@ -48,8 +48,6 @@ public class DotDragController : MonoBehaviour
                 this.dragDirection = DragDirection.DownDrag;
                 DragDot(this.dragDirection);
             }
-
-            //_boardScript.isDragible = false;
         }
 
 
@@ -57,18 +55,24 @@ public class DotDragController : MonoBehaviour
 
     public void DragDot(DragDirection dragDirection)
     {
+
         if (dragDirection == DragDirection.RightDrag)
         {
             _dotScr.mouseDownDotPosX += 1;
             otherGO = Board.allDots[(int)_dotScr.mouseDownDotPosX, (int)gameObject.transform.position.y];
 
-            Board.allDots[(int)(gameObject.transform.position.x), (int)gameObject.transform.position.y] = otherGO;
-            otherGO.GetComponent<Dot>().targetPos = new Vector2(gameObject.transform.position.x, gameObject.transform.position.y);
+            /*We perform this check to avoid the error of a tile being replaced by another tile that is 
+            more than one unit away from it for various reasons.*/
+            if (Vector2.Distance(otherGO.transform.position, gameObject.transform.position) == 1)
+            {
+                Board.allDots[(int)(gameObject.transform.position.x), (int)gameObject.transform.position.y] = otherGO;
+                otherGO.GetComponent<Dot>().targetPos = new Vector2(gameObject.transform.position.x, gameObject.transform.position.y);
 
-            Board.allDots[(int)(_dotScr.mouseDownDotPosX), (int)gameObject.transform.position.y] = gameObject;
-            _dotScr.targetPos = new Vector2(_dotScr.mouseDownDotPosX, gameObject.transform.position.y);
+                Board.allDots[(int)(_dotScr.mouseDownDotPosX), (int)gameObject.transform.position.y] = gameObject;
+                _dotScr.targetPos = new Vector2(_dotScr.mouseDownDotPosX, gameObject.transform.position.y);
 
-            _boardScript.isDragible = false;
+                _boardScript.isDragible = false;
+            }
         }
 
         else if (dragDirection == DragDirection.LeftDrag)
@@ -76,13 +80,16 @@ public class DotDragController : MonoBehaviour
             _dotScr.mouseDownDotPosX -= 1;
             otherGO = Board.allDots[(int)_dotScr.mouseDownDotPosX, (int)gameObject.transform.position.y];
 
-            Board.allDots[(int)(gameObject.transform.position.x), (int)gameObject.transform.position.y] = otherGO;
-            otherGO.GetComponent<Dot>().targetPos = new Vector2(gameObject.transform.position.x, gameObject.transform.position.y);
+            if (Vector2.Distance(otherGO.transform.position, gameObject.transform.position) == 1)
+            {
+                Board.allDots[(int)(gameObject.transform.position.x), (int)gameObject.transform.position.y] = otherGO;
+                otherGO.GetComponent<Dot>().targetPos = new Vector2(gameObject.transform.position.x, gameObject.transform.position.y);
 
-            Board.allDots[(int)(_dotScr.mouseDownDotPosX), (int)gameObject.transform.position.y] = gameObject;
-            _dotScr.targetPos = new Vector2(_dotScr.mouseDownDotPosX, gameObject.transform.position.y);
+                Board.allDots[(int)(_dotScr.mouseDownDotPosX), (int)gameObject.transform.position.y] = gameObject;
+                _dotScr.targetPos = new Vector2(_dotScr.mouseDownDotPosX, gameObject.transform.position.y);
 
-            _boardScript.isDragible = false;
+                _boardScript.isDragible = false;
+            }
         }
 
         else if (dragDirection == DragDirection.TopDrag)
@@ -90,13 +97,16 @@ public class DotDragController : MonoBehaviour
             _dotScr.mouseDownDotPosY += 1;
             otherGO = Board.allDots[(int)gameObject.transform.position.x, (int)_dotScr.mouseDownDotPosY];
 
-            Board.allDots[(int)gameObject.transform.position.x, (int)(gameObject.transform.position.y)] = otherGO;
-            otherGO.GetComponent<Dot>().targetPos = new Vector2(gameObject.transform.position.x, gameObject.transform.position.y);
+            if (Vector2.Distance(otherGO.transform.position, gameObject.transform.position) == 1)
+            {
+                Board.allDots[(int)gameObject.transform.position.x, (int)(gameObject.transform.position.y)] = otherGO;
+                otherGO.GetComponent<Dot>().targetPos = new Vector2(gameObject.transform.position.x, gameObject.transform.position.y);
 
-            Board.allDots[(int)(gameObject.transform.position.x), (int)(_dotScr.mouseDownDotPosY)] = gameObject;
-            _dotScr.targetPos = new Vector2(gameObject.transform.position.x, _dotScr.mouseDownDotPosY);
+                Board.allDots[(int)(gameObject.transform.position.x), (int)(_dotScr.mouseDownDotPosY)] = gameObject;
+                _dotScr.targetPos = new Vector2(gameObject.transform.position.x, _dotScr.mouseDownDotPosY);
 
-            _boardScript.isDragible = false;
+                _boardScript.isDragible = false;
+            }
 
         }
 
@@ -105,13 +115,16 @@ public class DotDragController : MonoBehaviour
             _dotScr.mouseDownDotPosY -= 1;
             otherGO = Board.allDots[(int)gameObject.transform.position.x, (int)_dotScr.mouseDownDotPosY];
 
-            Board.allDots[(int)gameObject.transform.position.x, (int)(gameObject.transform.position.y)] = otherGO;
-            otherGO.GetComponent<Dot>().targetPos = new Vector2(gameObject.transform.position.x, gameObject.transform.position.y);
+            if (Vector2.Distance(otherGO.transform.position, gameObject.transform.position) == 1)
+            {
+                Board.allDots[(int)gameObject.transform.position.x, (int)(gameObject.transform.position.y)] = otherGO;
+                otherGO.GetComponent<Dot>().targetPos = new Vector2(gameObject.transform.position.x, gameObject.transform.position.y);
 
-            Board.allDots[(int)(gameObject.transform.position.x), (int)(_dotScr.mouseDownDotPosY)] = gameObject;
-            _dotScr.targetPos = new Vector2(gameObject.transform.position.x, _dotScr.mouseDownDotPosY);
+                Board.allDots[(int)(gameObject.transform.position.x), (int)(_dotScr.mouseDownDotPosY)] = gameObject;
+                _dotScr.targetPos = new Vector2(gameObject.transform.position.x, _dotScr.mouseDownDotPosY);
 
-            _boardScript.isDragible = false;
+                _boardScript.isDragible = false;
+            }
         }
     }
 }

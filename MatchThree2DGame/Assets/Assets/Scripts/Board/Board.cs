@@ -10,12 +10,14 @@ public class Board : MonoBehaviour
     static public GameObject[,] allDots;
 
     public bool isDragible = true;
+    private EffectController _effectCtrlScr;
 
     Coroutine _myCorutine;
 
     void Start()
     {
         allDots = new GameObject[width, height];
+        _effectCtrlScr = GetComponent<EffectController>();
         Setup();
     }
 
@@ -107,7 +109,7 @@ public class Board : MonoBehaviour
         {
             for (int j = 0; j < height; j++)
             {
-
+                //int lenght = Random.Range(0,5);
                 int dotToUse = Random.Range(0, _dotPrefabs.Length);
                 do
                 {
@@ -127,7 +129,9 @@ public class Board : MonoBehaviour
 
     private void DestroyDot(float posX, float posY)
     {
-        Destroy(Board.allDots[(int)posX, (int)posY]);
+        GameObject _dot = Board.allDots[(int)posX, (int)posY];
+        _effectCtrlScr.CandyFragmentationEffect(_dot);
+        Destroy(_dot);
         Board.allDots[(int)posX, (int)posY] = null;
     }
 

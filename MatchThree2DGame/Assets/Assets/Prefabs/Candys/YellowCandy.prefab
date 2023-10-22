@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 8318516643774569652}
   m_Layer: 0
   m_Name: YellowCandy
-  m_TagString: YellowDot
+  m_TagString: YellowCandy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
