@@ -11,6 +11,7 @@ public class Board : MonoBehaviour
 
     public bool isDragible = true;
     private EffectController _effectCtrlScr;
+    private SoundEffectController _soundEffectCtrlScr;
 
     Coroutine _myCorutine;
 
@@ -18,6 +19,7 @@ public class Board : MonoBehaviour
     {
         allDots = new GameObject[width, height];
         _effectCtrlScr = GetComponent<EffectController>();
+        _soundEffectCtrlScr = GetComponent<SoundEffectController>();
         Setup();
     }
 
@@ -130,13 +132,20 @@ public class Board : MonoBehaviour
     private void DestroyDot(float posX, float posY)
     {
         GameObject _dot = Board.allDots[(int)posX, (int)posY];
+
         _effectCtrlScr.CandyFragmentationEffect(_dot);
+        _effectCtrlScr.PointTextEffect(10, _dot);
+        GameManager.instance.ScoreIncrease(10);
+        GameManager.instance.DestroyCandyIncrease(1);
+
         Destroy(_dot);
         Board.allDots[(int)posX, (int)posY] = null;
     }
 
     public void GetMatchDot()
     {
+        _soundEffectCtrlScr.PlaySoundEffect(1);
+
         for (int i = 0; i < width; i++)
         {
             for (int j = 0; j < height; j++)

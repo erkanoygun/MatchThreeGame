@@ -3,18 +3,19 @@ using UnityEngine;
 public class DotDragController : MonoBehaviour
 {
     public DragDirection dragDirection;
-
     public GameObject otherGO;
 
     private Board _boardScript;
     private Dot _dotScr;
     private GameObject _boardGO;
+    private SoundEffectController _soundEffectCtrlScr;
 
     private void Start()
     {
         _boardGO = GameObject.FindWithTag("Board");
         _boardScript = _boardGO.GetComponent<Board>();
         _dotScr = GetComponent<Dot>();
+        _soundEffectCtrlScr = _boardGO.GetComponent<SoundEffectController>();
     }
     public void CalculateDragDirection(Vector2 endMousePos, Vector2 startMousePos)
     {
@@ -25,7 +26,7 @@ public class DotDragController : MonoBehaviour
 
         // We turn it into a degree.
         float angleDegrees = angleRadians * Mathf.Rad2Deg;
-
+        
         if (Mathf.Abs(angleDegrees) > 0.1f)
         {
             if (angleDegrees > -45f && angleDegrees < 45f && _dotScr.mouseDownDotPosX < (_boardScript.width - 1))
@@ -72,6 +73,8 @@ public class DotDragController : MonoBehaviour
                 _dotScr.targetPos = new Vector2(_dotScr.mouseDownDotPosX, gameObject.transform.position.y);
 
                 _boardScript.isDragible = false;
+
+                _soundEffectCtrlScr.PlaySoundEffect(0);
             }
         }
 
@@ -89,6 +92,8 @@ public class DotDragController : MonoBehaviour
                 _dotScr.targetPos = new Vector2(_dotScr.mouseDownDotPosX, gameObject.transform.position.y);
 
                 _boardScript.isDragible = false;
+
+                _soundEffectCtrlScr.PlaySoundEffect(0);
             }
         }
 
@@ -106,6 +111,8 @@ public class DotDragController : MonoBehaviour
                 _dotScr.targetPos = new Vector2(gameObject.transform.position.x, _dotScr.mouseDownDotPosY);
 
                 _boardScript.isDragible = false;
+
+                _soundEffectCtrlScr.PlaySoundEffect(0);
             }
 
         }
@@ -124,6 +131,8 @@ public class DotDragController : MonoBehaviour
                 _dotScr.targetPos = new Vector2(gameObject.transform.position.x, _dotScr.mouseDownDotPosY);
 
                 _boardScript.isDragible = false;
+
+                _soundEffectCtrlScr.PlaySoundEffect(0);
             }
         }
     }

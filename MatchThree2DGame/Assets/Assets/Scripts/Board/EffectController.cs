@@ -1,14 +1,18 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class EffectController : MonoBehaviour
 {
     [SerializeField] private GameObject _fragmentation;
+    [SerializeField] private Transform _effectsParentTrnsf;
+
+    [Header("UI")]
+    [SerializeField] private GameObject _pointTextParent;
 
     public void CandyFragmentationEffect(GameObject dot)
     {
         GameObject _effect = Instantiate(_fragmentation, dot.transform.position, Quaternion.identity);
+        _effect.transform.parent = _effectsParentTrnsf;
         ParticleSystem.MainModule mainModule = _effect.GetComponent<ParticleSystem>().main;
         mainModule.startColor = GetColor(dot.tag);
         Destroy(_effect, 1.5f);
@@ -35,5 +39,14 @@ public class EffectController : MonoBehaviour
             newColor = new Color(1f, 1f, 1f, 1f);
 
         return newColor;
+    }
+
+    public void PointTextEffect(int point, GameObject dot)
+    {
+        GameObject _pointTextPrefab = Instantiate(_pointTextParent, dot.transform.position, Quaternion.identity);
+        
+        _pointTextPrefab.transform.SetParent(_effectsParentTrnsf);
+        _pointTextPrefab.GetComponentInChildren<TMP_Text>().text = "+" + point.ToString();
+        Destroy(_pointTextPrefab.gameObject, 1.5f);
     }
 }

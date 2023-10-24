@@ -6,7 +6,6 @@ public class Dot : MonoBehaviour
 {
     private Vector2 startMousePos;
     private Vector2 endMousePos;
-
     public Vector2 targetPos;
 
     private float _dotMoveSpeed = 20f;
@@ -46,7 +45,6 @@ public class Dot : MonoBehaviour
             //gameObject.GetComponent<SpriteRenderer>().color = new Color(0f, 0f, 0f, 0.2f);
             StartCoroutine(DotDestroyMethodEnumerator());
         }
-
     }
 
     private void DotMove()
@@ -74,7 +72,7 @@ public class Dot : MonoBehaviour
         }
     }
 
-    
+
 
     /*When the same tiles are next to each other, we wait for 0.1 seconds to make sure that the 
     "FindMatches()" method is running and the "isMatch" values are "true" for all tiles with the 
@@ -113,7 +111,6 @@ public class Dot : MonoBehaviour
             mouseDownDotPosX = gameObject.transform.position.x;
             mouseDownDotPosY = gameObject.transform.position.y;
         }
-
     }
 
     private void OnMouseUp()
@@ -125,6 +122,8 @@ public class Dot : MonoBehaviour
         }
 
     }
+
+    
 
 
 }
