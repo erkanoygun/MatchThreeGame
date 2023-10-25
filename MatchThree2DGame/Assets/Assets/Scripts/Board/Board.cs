@@ -34,7 +34,7 @@ public class Board : MonoBehaviour
 
     IEnumerator CreateNewDotEnumerator()
     {
-        yield return new WaitForSeconds(.3f);
+        yield return new WaitForSeconds(0.3f);
         CreateNewDot();
 
     }
@@ -69,6 +69,7 @@ public class Board : MonoBehaviour
         _myCorutine = null;
     }
 
+    /*We slide the newly created candies into the empty slots below.*/
     private void DotMoveDownSlot()
     {
         for (int i = 0; i < width; i++)
@@ -133,10 +134,7 @@ public class Board : MonoBehaviour
     {
         GameObject _dot = Board.allDots[(int)posX, (int)posY];
 
-        _effectCtrlScr.CandyFragmentationEffect(_dot);
-        _effectCtrlScr.PointTextEffect(10, _dot);
-        GameManager.instance.ScoreIncrease(10);
-        GameManager.instance.DestroyCandyIncrease(1);
+        ChangeUIandEffectTrigger(_dot);
 
         Destroy(_dot);
         Board.allDots[(int)posX, (int)posY] = null;
@@ -157,5 +155,13 @@ public class Board : MonoBehaviour
                 }
             }
         }
+    }
+
+    private void ChangeUIandEffectTrigger(GameObject _dot)
+    {
+        _effectCtrlScr.CandyFragmentationEffect(_dot);
+        _effectCtrlScr.PointTextEffect(10, _dot);
+        GameManager.instance.ScoreIncrease(10);
+        GameManager.instance.DestroyCandyIncrease(1);
     }
 }

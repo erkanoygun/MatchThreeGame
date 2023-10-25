@@ -66,7 +66,7 @@ public class Dot : MonoBehaviour
             {
                 _boardScript.isDragible = true;
                 dotIsMoving = false;
-                StartCoroutine(DotBackOldPositionCheck());
+                StartCoroutine(DotBackOldPositionCheckEnumerator());
             }
 
         }
@@ -84,7 +84,7 @@ public class Dot : MonoBehaviour
         _boardScript.GetMatchDot();
     }
 
-    IEnumerator DotBackOldPositionCheck()
+    IEnumerator DotBackOldPositionCheckEnumerator()
     {
         yield return new WaitForSeconds(0.1f);
         if (!isMatched && _dotDragCtrlScr.otherGO != null)
